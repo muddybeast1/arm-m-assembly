@@ -1,6 +1,6 @@
 .section .vectors
 vector_table:
-    .word 0xABC0
+    .word 0x20001000
     .word reset_handler
     .zero 400
 
@@ -11,22 +11,14 @@ vector_table:
 reset_handler:
     mov r1, #7
     mov r2, #3
+    mov r3, #2
 
-    add r3, r1, r2
+    push {r1, r2, r3}
 
-    b piyush
+    mov r1, #5
+    mov r2, #5
+    mov r3, #5
 
-piyush2:
-    sub r4, r1, r2
+    pop {r3, r2, r1}
 
-    b end
-
-piyush:
-    mov r5, r3
-
-    lsl r6, r5, #2
-
-    b piyush2
-
-end:
-    bl .
+    b .
